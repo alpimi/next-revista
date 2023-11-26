@@ -24,7 +24,7 @@ const Logo = ({ url }: { url: string }) => <Image className="mx-auto" src={url} 
 
 const EditorialLogo = () => (
   <div className="flex gap-x-4 w-full justify-center">
-    <Image src="/editorialpueblo.svg" className="mb-1 md:mb-0" alt="Logo" width={100} height={20} priority />
+    <Image src="/editorialpueblo.svg" className="" alt="Logo" width={100} height={20} priority />
     <h4 className="flex mx-4 items-end  font-semibold text-lg  text-gray-300">
       Una revista de
       <br />
