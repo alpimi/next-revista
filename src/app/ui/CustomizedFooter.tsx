@@ -37,30 +37,14 @@ const CopyRight = ({ className }: { className?: string }) => (
   <p className={`order-6 text-xs my-4 text-gray-300 w-full ${className}`}>© 2023 Editorial Pueblo y Educación.Todos los derechos reservados</p>
 );
 
-const SectionList = ({ className }: { className?: string }) => (
-  <div className="w-full">
-    <h4 className="text-xl text-white mb-4">Secciones</h4>
-    <ul className={`gap-4 ${className}`}>
-      {secciones.map((s, i) => (
-        <Link
-          className={`text-gray-300 text-lg ${s.text_alignment}
-          lg:text-left`}
-          key={s.name}
-          href={s.href}
-        >
-          {s.name}
-        </Link>
-      ))}
-    </ul>
-  </div>
-);
+type ISimpleLists = { list: { name: string; href: string; text_alignment?: string }[]; title: string; className?: string; defaultAlignment?: boolean };
 
-const SimpleLists = ({ title, list }: { list: { name: string; href: string }[]; title: string }) => (
+const SimpleLists = ({ title, list, className = "flex flex-col", defaultAlignment }: ISimpleLists) => (
   <div className="">
     <h4 className="text-xl text-white mb-4">{title}</h4>
-    <ul className="space-y-4 flex flex-col">
+    <ul className={`gap-4 ${className}`}>
       {list.map((o, i) => (
-        <Link className={`text-gray-300 text-lg`} key={o.name} href={o.href}>
+        <Link className={`text-gray-300 text-lg ${!defaultAlignment && o?.text_alignment}`} key={o.name} href={o.href}>
           {o.name}
         </Link>
       ))}
@@ -79,7 +63,7 @@ const FooterDesktop = () => (
     </div>
     <div className="flex flex-col justify-between w-full">
       <div className="grid grid-cols-3 gap-8">
-        <SectionList className="flex flex-col" />
+        <SimpleLists list={secciones} title="Secciones" defaultAlignment />
         <SimpleLists list={otros} title="Otros" />
         <SimpleLists list={publicidad} title="Publicidad" />
       </div>
@@ -92,7 +76,7 @@ const FooterMobile = () => (
   <footer className="bg-gris-oscuro p-8 grid place-content-center gap-5 w-full lg:hidden">
     <Logo url="/capa1.svg" />
     <SocialMedia />
-    <SectionList className="grid grid-cols-3" />
+    <SimpleLists list={secciones} title="Secciones" className="grid grid-cols-3" />
     <div className="grid grid-cols-2 gap-2">
       <SimpleLists list={publicidad} title="Publicidad" />
       <SimpleLists list={otros} title="Otros" />
